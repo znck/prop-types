@@ -22,7 +22,7 @@ documents the different validators provided:
 
 <!-- Example borrowed from facebook/prop-types -->
 
-``` html
+```vue
 <script>
 import PropTypes from 'prop-types';
 
@@ -74,7 +74,8 @@ export default {
 
   // You can also supply a custom validator.
   customArrayProp: PropTypes.string.validate(value => value === 'foo')
-};
+}
+
 </script>
 ```
 
