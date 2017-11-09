@@ -1,0 +1,44 @@
+{
+  "name": "@znck/prop-types",
+  "version": "0.0.0",
+  "description": "Fluent prop validation for Vue",
+  "main": "prop-types.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "ava *.spec.js",
+    "build": "babel -o prop-types.js index.js",
+    "prepare": "npm test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/znck/vue-prop-types.git"
+  },
+  "keywords": [
+    "vue",
+    "prop-types",
+    "props",
+    "validation"
+  ],
+  "author": "Rahul Kadyan <hi@znck.me> (https://znck.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/znck/vue-prop-types/issues"
+  },
+  "homepage": "https://github.com/znck/vue-prop-types#readme",
+  "devDependencies": {
+    "ava": "^0.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-es2015-parameters": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0"
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  }
+}
