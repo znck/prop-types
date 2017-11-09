@@ -1,6 +1,6 @@
 # PropTypes for Vue
 
-Fluent prop validation for Vue that won't land in you production code.
+Fluent prop validation for Vue that won't land in your production code.
 
 > It uses `process.env.NODE_ENV` to detect production build.
 
