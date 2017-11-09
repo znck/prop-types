@@ -8,7 +8,8 @@
   "scripts": {
     "test": "ava *.spec.js",
     "build": "babel -o prop-types.js index.js",
-    "prepare": "npm test && npm run build"
+    "prepare": "npm test && npm run build",
+    "preversion": "npm test"
   },
   "repository": {
     "type": "git",

@@ -210,8 +210,8 @@ let PropTypes = {
   get array () { return createType(Array) },
   get object () { return createType(Object) },
   get func () { return createType(Function) },
-  get symbol () { return createType(Symbol) }
-  get any () { return createType() }
+  get symbol () { return createType(Symbol) },
+  get any () { return createType() },
 }
 
 if (process.env.NODE_ENV === 'production') {
