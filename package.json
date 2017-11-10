@@ -5,11 +5,13 @@
   "main": "prop-types.js",
   "module": "index.js",
   "jsnext:main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "ava *.spec.js",
     "build": "babel -o prop-types.js index.js",
     "prepare": "npm test && npm run build",
-    "preversion": "npm test"
+    "preversion": "npm test",
+    "prepublishOnly": "./publish.sh \"${AUTO_PUBLISH:-fail}\""
   },
   "repository": {
     "type": "git",

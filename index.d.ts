@@ -1,4 +1,4 @@
-// Type definitions for @znck/prop-types 0.0.3
+// Type definitions for @znck/prop-types
 // Project: @znck/prop-types
 // Definitions by: Rahul Kadyan <https://znck.me>
 
