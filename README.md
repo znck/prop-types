@@ -1,6 +1,6 @@
 
 <div class="text-xs-center" align="center" style="margin: 20px">
-  <img src="./docs/logo.svg" height="255" alt="">
+  <img src="./docs/logo.png" height="255" alt="prop-types">
 </div>
 
 <div class="text-xs-center" align="center">
