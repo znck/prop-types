@@ -1,12 +1,12 @@
-function normalizeParams (items) {
+function normalizeParams(items) {
   return items.length === 1 && Array.isArray(items[0]) ? items[0] : items
 }
 
-function ensureOne (items) {
+function ensureOne(items) {
   if (items.length === 0) throw new Error('Atleast one type or value is required')
 }
 
-function toMap (keys) {
+function toMap(keys) {
   if (typeof Set !== 'undefined') {
     const set = new Set()
     keys.forEach(key => set.add(key))
@@ -35,25 +35,25 @@ const typeMap = {
   array: Array
 }
 
-function isType (type, item, nullAllowed = false) {
+function isType(type, item, nullAllowed = false) {
   if (nullAllowed && (item === null || item === undefined)) return true
 
   if (Array === type && Array.isArray(item)) return true
 
   return Object.keys(typeMap).some(
-    key => (typeMap[key] === type && typeof item === key)
+    key => (typeMap[key] === type && typeof item === key) // eslint-disable-line valid-typeof
   )
 }
 
-function normalizeType (type) {
+function normalizeType(type) {
   if (type in typeMap) return createType(typeMap[type])
   if (Object.values(typeMap).includes(type)) return createType(type)
   if (typeof type === 'function') return { validator: type }
-  
+
   return type
 }
 
-function typeOf (value) {
+function typeOf(value) {
   return Array.isArray(value) ? typeMap.array : typeMap[typeof value] || Object
 }
 
@@ -63,7 +63,7 @@ function toArray(value) {
   )
 }
 
-export function runValidation (validator, value) {  
+export function runValidation(validator, value) {
   const types = toArray(validator.type)
 
   return (
@@ -76,24 +76,24 @@ export function runValidation (validator, value) {
 }
 
 class Prop {
-  constructor (type) {
+  constructor(type) {
     this.type = toArray(type)
   }
 
-  required () {
+  required() {
     this.required = true
 
     return this
   }
 
-  default (value) {
+  default(value) {
     this.default = value
 
     return this
   }
 
-  validate (cb) {
-    const original = typeof this.validator === 'function' ? this.validator : (any => true)
+  validate(cb) {
+    const original = typeof this.validator === 'function' ? this.validator : (() => true)
 
     this.validator = (...args) => {
       return original.apply(this, args) && cb.apply(this, args)
@@ -103,7 +103,7 @@ class Prop {
   }
 }
 
-function createType (type) {
+function createType(type) {
   const prop = new Prop(type)
 
   Object.defineProperties(prop, {
@@ -116,8 +116,8 @@ function createType (type) {
   return prop
 }
 
-let PropTypes = {
-  instanceOf: (type) => createType(type),
+const PropTypes = {
+  instanceOf: type => createType(type),
   oneOf: (...values) => {
     values = normalizeParams(values)
 
@@ -133,10 +133,10 @@ let PropTypes = {
 
     const prop = createType(types)
 
-    if (values.length) {
+    if (values.length > 0) {
       const valuesMap = toMap(values)
 
-      prop.validator = function validator(value) {
+      prop.validator = value => {
         if (prop.required !== true && (value === null || value === undefined)) return true
 
         return valuesMap.has(value)
@@ -153,7 +153,7 @@ let PropTypes = {
     const prop = createType(types.filter(type => type.type).map(type => type.type[0]))
     const validators = types.filter(type => type.validator)
 
-    if (validators.length) {
+    if (validators.length > 0) {
       prop.validator = value => validators.some(
         validator => runValidation(validator, value)
       )
@@ -185,7 +185,7 @@ let PropTypes = {
     const prop = createType(Object)
 
     Object.keys(shape).forEach(
-      key => { 
+      key => {
         shape[key] = normalizeType(shape[key])
       }
     )
@@ -195,7 +195,7 @@ let PropTypes = {
 
       return Object.keys(shape).every(
         key => runValidation(
-          shape[key], 
+          shape[key],
           (value && typeof value === 'object') ? value[key] : undefined,
           key
         )
@@ -204,39 +204,67 @@ let PropTypes = {
 
     return prop
   },
-  get string () { return createType(String) },
-  get number () { return createType(Number) },
-  get bool () { return createType(Boolean) },
-  get array () { return createType(Array) },
-  get object () { return createType(Object) },
-  get func () { return createType(Function) },
-  get symbol () { return createType(Symbol) },
-  get any () { return createType() },
-}
-
-if (process.env.NODE_ENV === 'production') {
-  const shim = {
-    required: () => shim,
-    default: () => shim,
-    validate: () => shim,
-  }
-
-  shim.isRequired = shim
-
-  PropTypes = {
-    instanceOf: () => shim,
-    oneOf: () => shim,
-    oneOfType: () => shim,
-    arrayOf: () => shim,
-    objectOf: () => shim,
-    get string () { return shim },
-    get number () { return shim },
-    get bool () { return shim },
-    get array () { return shim },
-    get object () { return shim },
-    get func () { return shim },
-    get symbol () { return shim }
+  get string() {
+    return createType(String)
+  },
+  get number() {
+    return createType(Number)
+  },
+  get bool() {
+    return createType(Boolean)
+  },
+  get array() {
+    return createType(Array)
+  },
+  get object() {
+    return createType(Object)
+  },
+  get func() {
+    return createType(Function)
+  },
+  get symbol() {
+    return createType(Symbol)
+  },
+  get any() {
+    return createType()
   }
 }
 
-export default PropTypes
+const shim = {
+  required: () => shim,
+  default: value => ({ ...shim, default: value }),
+  validate: () => shim
+}
+
+shim.isRequired = shim
+
+const shimmedPropTypes = {
+  instanceOf: () => shim,
+  oneOf: () => shim,
+  oneOfType: () => shim,
+  arrayOf: () => shim,
+  objectOf: () => shim,
+  get string() {
+    return shim
+  },
+  get number() {
+    return shim
+  },
+  get bool() {
+    return shim
+  },
+  get array() {
+    return shim
+  },
+  get object() {
+    return shim
+  },
+  get func() {
+    return shim
+  },
+  get symbol() {
+    return shim
+  }
+}
+
+export default (process.env.NODE_ENV === 'production' ? shimmedPropTypes : PropTypes)

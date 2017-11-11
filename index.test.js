@@ -3,10 +3,10 @@ import PropTypes, { runValidation } from './'
 
 test('runValidation', t => {
   t.true(runValidation(PropTypes.number.isRequired, 1))
-  
+
   t.false(runValidation(PropTypes.number.isRequired, null))
   t.true(runValidation(PropTypes.number, null))
-  
+
   t.false(runValidation(PropTypes.number.isRequired, undefined))
   t.true(runValidation(PropTypes.number, undefined))
 })
@@ -23,19 +23,19 @@ test('optional types', t => {
 test('required types', t => {
   t.deepEqual([String], PropTypes.string.required().type)
   t.true(PropTypes.string.required().required)
-  
+
   t.deepEqual([Number], PropTypes.number.required().type)
   t.true(PropTypes.number.required().required)
-  
+
   t.deepEqual([Boolean], PropTypes.bool.required().type)
   t.true(PropTypes.bool.required().required)
-  
+
   t.deepEqual([Object], PropTypes.object.required().type)
   t.true(PropTypes.object.required().required)
-  
+
   t.deepEqual([Array], PropTypes.array.required().type)
   t.true(PropTypes.array.required().required)
-  
+
   t.deepEqual([Symbol], PropTypes.symbol.required().type)
   t.true(PropTypes.symbol.required().required)
 
@@ -56,14 +56,13 @@ test('required types', t => {
 
   t.deepEqual([Symbol], PropTypes.symbol.isRequired.type)
   t.true(PropTypes.symbol.isRequired.required)
-
 })
 
 test('instanceOf', t => {
   class Foo {}
 
   t.deepEqual([Foo], PropTypes.instanceOf(Foo).type)
-  
+
   t.deepEqual([Foo], PropTypes.instanceOf(Foo).isRequired.type)
 })
 
@@ -83,7 +82,7 @@ test('oneOf', t => {
 test('oneOfType', t => {
   t.deepEqual([Number, String], PropTypes.oneOfType(PropTypes.number, String).type)
   t.deepEqual([Number, String], PropTypes.oneOfType([PropTypes.number, String]).type)
-  
+
   t.true(PropTypes.oneOfType(PropTypes.number, String).isRequired.required)
   t.true(PropTypes.oneOfType([PropTypes.number, String]).required().required)
 

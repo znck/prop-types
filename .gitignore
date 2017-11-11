@@ -3,3 +3,5 @@ dist/
 coverage/
 .nyc_output
 prop-types.js
+yarn.lock
+shrinkwrap.yaml
