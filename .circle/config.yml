@@ -2,9 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:6
       - image: node:8
-      - image: node:latest
 
     branches:
       ignore:
