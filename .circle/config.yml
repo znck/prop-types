@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:latest
+
+    branches:
+      ignore:
+        - gh-pages # list of branches to ignore
+        - /release\/.*/ # or ignore regexes
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+
+      - run:
+          name: test
+          command: npm run test:cov
+      - run:
+          name: upload coverage
+          command: bash <(curl -s https://codecov.io/bash)
+

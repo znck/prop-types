@@ -1,4 +1,19 @@
-# PropTypes for Vue
+
+<div class="text-xs-center" align="center" style="margin: 20px">
+  <img src="./docs/logo.svg" height="255" alt="">
+</div>
+
+<div class="text-xs-center" align="center">
+
+<!-- [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/) -->
+[![NPM version](https://img.shields.io/npm/v/@znck/prop-types.svg?style=flat)](https://npmjs.com/package/@znck/prop-types)
+[![NPM downloads](https://img.shields.io/npm/dm/@znck/prop-types.svg?style=flat)](https://npmjs.com/package/@znck/prop-types)
+[![CircleCI](https://circleci.com/gh/znck/prop-types/tree/master.svg?style=shield)](https://circleci.com/gh/znck/prop-types-temp/tree/master)
+[![codecov](https://codecov.io/gh/znck/prop-types/branch/master/graph/badge.svg)](https://codecov.io/gh/znck/prop-types)
+
+</div>
+
+## Introduction
 
 Fluent prop validation for Vue that won't land in your production code.
 
@@ -81,11 +96,6 @@ export default {
 </script>
 ```
 
-## Built With
-
-* [Babel](http://babeljs.io/) - Transpiling
-* [Ava](https://github.com/avajs/ava) - Testing
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
@@ -94,12 +104,9 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/znck/prop-types/releases).
 
-## Authors
+## Author
 
-* **Rahul Kadayn** - *Initial work* - [znck](https://github.com/znck)
+**prop-types** © [Rahul Kadyan](https://github.com/znck), Released under the [MIT](./LICENSE) License.<br>
+Authored and maintained by Rahul Kadyan with help from contributors ([list](https://github.com/znck/prop-types-temp/contributors)).
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+> [znck.me](https://znck.me) · GitHub [@Rahul Kadyan](https://github.com/znck) · Twitter [@znck0](https://twitter.com/@znck0)

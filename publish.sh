@@ -42,10 +42,10 @@ function publish {
 
   function resetAndDie {
     git reset --hard ${COMMIT}
-    
+
     die "$@"
   }
-  
+
   npm version "$VERSION" || resetAndDie "NPM could not create new version."
   if [ -z "$1" ]; then
     AUTO_PUBLISH=pass npm publish --tags "$@" || resetAndDie "NPM publish failed."

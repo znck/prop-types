@@ -7,10 +7,11 @@
   "jsnext:main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "ava *.spec.js",
+    "test:cov": "nyc ava *.spec.js",
+    "test": "npm run lint && ava *.spec.js",
+    "lint": "xo",
     "build": "babel -o prop-types.js index.js",
     "prepare": "npm test && npm run build",
-    "preversion": "npm test",
     "prepublishOnly": "./publish.sh \"${AUTO_PUBLISH:-fail}\""
   },
   "repository": {
@@ -43,5 +44,12 @@
       "babel-register"
     ],
     "babel": "inherit"
+  },
+
+  "xo": {
+    "extends": "rem",
+    "envs": [
+      "ava"
+    ]
   }
 }
