@@ -7,7 +7,7 @@
   "jsnext:main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test:cov": "nyc ava *.test.js",
+    "test:cov": "nyc ava *.test.js && nyc report --reporter=text-lcov > coverage.lcov",
     "test": "npm run lint && ava *.test.js",
     "lint": "xo",
     "build": "babel -o prop-types.js index.js",
