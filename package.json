@@ -53,5 +53,8 @@
       "es6",
       "shared-node-browser"
     ]
+  },
+  "dependencies": {
+    "nyc": "^11.3.0"
   }
 }
