@@ -49,6 +49,9 @@
   },
   "xo": {
     "extends": "rem",
-    "envs": ["es6", "shared-node-browser"]
+    "envs": [
+      "es6",
+      "shared-node-browser"
+    ]
   }
 }
