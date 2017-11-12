@@ -19,20 +19,20 @@ Fluent prop validation for Vue that won't land in your production code.
 
 > It uses `process.env.NODE_ENV` to detect production build.
 
-## Installation
+## Usage
+
+### Installation
 
 ```shell
 npm install --save @znck/prop-types
 ```
 
-## Importing
+### Examples
 
 ```js
 import PropTypes from '@znck/prop-types'; // ES6
 var PropTypes = require('@znck/prop-types'); // ES5 with npm
 ```
-
-## Usage
 
 Here is an example of using PropTypes with a Vue component, which also
 documents the different validators provided:
