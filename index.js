@@ -1,3 +1,5 @@
+import createShim from './create-shim'
+
 function normalizeParams(items) {
   return items.length === 1 && Array.isArray(items[0]) ? items[0] : items
 }
@@ -80,13 +82,17 @@ class Prop {
     this.type = toArray(type)
   }
 
-  required() {
+  _required() {
     this.required = true
 
     return this
   }
 
-  default(value) {
+  get isRequired() {
+    return this._required()
+  }
+
+  use(value) {
     this.default = value
 
     return this
@@ -104,16 +110,7 @@ class Prop {
 }
 
 function createType(type) {
-  const prop = new Prop(type)
-
-  Object.defineProperties(prop, {
-    isRequired: {
-      enumerable: false,
-      get: () => prop.required()
-    }
-  })
-
-  return prop
+  return new Prop(type)
 }
 
 const PropTypes = {
@@ -230,41 +227,4 @@ const PropTypes = {
   }
 }
 
-const shim = {
-  required: () => shim,
-  default: value => ({ ...shim, default: value }),
-  validate: () => shim
-}
-
-shim.isRequired = shim
-
-const shimmedPropTypes = {
-  instanceOf: () => shim,
-  oneOf: () => shim,
-  oneOfType: () => shim,
-  arrayOf: () => shim,
-  objectOf: () => shim,
-  get string() {
-    return shim
-  },
-  get number() {
-    return shim
-  },
-  get bool() {
-    return shim
-  },
-  get array() {
-    return shim
-  },
-  get object() {
-    return shim
-  },
-  get func() {
-    return shim
-  },
-  get symbol() {
-    return shim
-  }
-}
-
-export default (process.env.NODE_ENV === 'production' ? shimmedPropTypes : PropTypes)
+export default (process.env.NODE_ENV === 'production' ? createShim() : PropTypes)

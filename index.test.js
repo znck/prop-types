@@ -1,5 +1,5 @@
 import test from 'ava'
-import PropTypes, { runValidation } from './'
+import PropTypes, { runValidation } from './index'
 
 test('runValidation', t => {
   t.true(runValidation(PropTypes.number.isRequired, 1))
@@ -21,24 +21,6 @@ test('optional types', t => {
 })
 
 test('required types', t => {
-  t.deepEqual([String], PropTypes.string.required().type)
-  t.true(PropTypes.string.required().required)
-
-  t.deepEqual([Number], PropTypes.number.required().type)
-  t.true(PropTypes.number.required().required)
-
-  t.deepEqual([Boolean], PropTypes.bool.required().type)
-  t.true(PropTypes.bool.required().required)
-
-  t.deepEqual([Object], PropTypes.object.required().type)
-  t.true(PropTypes.object.required().required)
-
-  t.deepEqual([Array], PropTypes.array.required().type)
-  t.true(PropTypes.array.required().required)
-
-  t.deepEqual([Symbol], PropTypes.symbol.required().type)
-  t.true(PropTypes.symbol.required().required)
-
   t.deepEqual([String], PropTypes.string.isRequired.type)
   t.true(PropTypes.string.isRequired.required)
 
@@ -84,7 +66,6 @@ test('oneOfType', t => {
   t.deepEqual([Number, String], PropTypes.oneOfType([PropTypes.number, String]).type)
 
   t.true(PropTypes.oneOfType(PropTypes.number, String).isRequired.required)
-  t.true(PropTypes.oneOfType([PropTypes.number, String]).required().required)
 
   const prop = PropTypes.oneOfType(v => v === 1, v => v === '1').isRequired
 

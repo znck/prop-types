@@ -51,7 +51,8 @@
                 <textPath
                   xlink:href="#lower"
                   startOffset="50%"
-                  alignment-baseline="text-after-edge">Fluent prop validation for Vue</textPath>
+                  alignment-baseline="middle"
+                  baseline-shift="70%">Fluent prop validation for Vue</textPath>
             </text>
             <text
               font-family="Bellota-Italic, Bellota"
