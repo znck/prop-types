@@ -7,7 +7,7 @@
   "jsnext:main": "src/index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "test:cov": "nyc ava *.test.js && nyc report --reporter=text-lcov > coverage.lcov",
+    "test:cov": "nyc ava src/*.test.js && nyc report --reporter=text-lcov > coverage.lcov",
     "test": "npm run lint && ava src/*.test.js",
     "lint": "xo",
     "build": "BABEL_ENV=build rollup -c",
