@@ -1,15 +1,14 @@
-
 <div class="text-xs-center" align="center" style="margin: 20px">
   <img src="./docs/logo.png" height="255" alt="prop-types">
-</div>
+</div><br><br>
 
 <div class="text-xs-center" align="center">
 
-<!-- [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/) -->
-[![NPM version](https://img.shields.io/npm/v/@znck/prop-types.svg?style=flat)](https://npmjs.com/package/@znck/prop-types)
-[![NPM downloads](https://img.shields.io/npm/dm/@znck/prop-types.svg?style=flat)](https://npmjs.com/package/@znck/prop-types)
-[![CircleCI](https://circleci.com/gh/znck/prop-types/tree/master.svg?style=shield)](https://circleci.com/gh/znck/prop-types/tree/master)
-[![codecov](https://codecov.io/gh/znck/prop-types/branch/master/graph/badge.svg)](https://codecov.io/gh/znck/prop-types)
+  [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
+  [![NPM version](https://img.shields.io/npm/v/@znck/prop-types.svg?style=flat)](https://npmjs.com/package/@znck/prop-types)
+  [![NPM downloads](https://img.shields.io/npm/dm/@znck/prop-types.svg?style=flat)](https://npmjs.com/package/@znck/prop-types)
+  [![CircleCI](https://circleci.com/gh/znck/prop-types/tree/master.svg?style=shield)](https://circleci.com/gh/znck/prop-types/tree/master)
+  [![codecov](https://codecov.io/gh/znck/prop-types/branch/master/graph/badge.svg)](https://codecov.io/gh/znck/prop-types)
 
 </div>
 
