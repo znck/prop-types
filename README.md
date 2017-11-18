@@ -8,7 +8,7 @@
 <!-- [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/) -->
 [![NPM version](https://img.shields.io/npm/v/@znck/prop-types.svg?style=flat)](https://npmjs.com/package/@znck/prop-types)
 [![NPM downloads](https://img.shields.io/npm/dm/@znck/prop-types.svg?style=flat)](https://npmjs.com/package/@znck/prop-types)
-[![CircleCI](https://circleci.com/gh/znck/prop-types/tree/master.svg?style=shield)](https://circleci.com/gh/znck/prop-types-temp/tree/master)
+[![CircleCI](https://circleci.com/gh/znck/prop-types/tree/master.svg?style=shield)](https://circleci.com/gh/znck/prop-types/tree/master)
 [![codecov](https://codecov.io/gh/znck/prop-types/branch/master/graph/badge.svg)](https://codecov.io/gh/znck/prop-types)
 
 </div>
@@ -90,7 +90,11 @@ export default {
     requiredAny: PropTypes.any.isRequired,
 
     // You can also supply a custom validator.
-    customArrayProp: PropTypes.string.validate(value => value === 'foo')
+    customArrayProp: PropTypes.string.validate(value => value === 'foo'),
+
+    // You create similar props using modifiers.
+    // Following would create 4 props, namely `size`, `size.mobile`, `size.tablet` and `size.desktop`.
+    ...PropTypes.string.modifiers(/* name =*/'size', ['mobile', 'tablet', 'desktop'])
   }
 }
 </script>
