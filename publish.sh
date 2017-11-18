@@ -42,6 +42,7 @@ function publish {
 
   function resetAndDie {
     git reset --hard ${COMMIT}
+    git tag --delete "v$VERSION"
 
     die "$@"
   }
