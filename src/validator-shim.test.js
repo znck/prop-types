@@ -1,5 +1,5 @@
 import test from 'ava'
-import createPropTypesShim from './create-shim'
+import createPropTypesShim from './validator-shim'
 
 const PropTypes = createPropTypesShim()
 
@@ -51,4 +51,12 @@ test('objectOf', t => {
 test('shape', t => {
   t.falsy(PropTypes.shape({}).required)
   t.true(PropTypes.shape({}).isRequired.required)
+})
+
+test('modifiers', t => {
+  const prop = PropTypes.string.modifiers(/* name = */'size', 'mobile', 'desktop')
+
+  t.true('size' in prop)
+  t.true('size.mobile' in prop)
+  t.true('size.desktop' in prop)
 })

@@ -2,15 +2,16 @@
   "name": "@znck/prop-types",
   "version": "0.1.0",
   "description": "Fluent prop validation for Vue",
-  "main": "prop-types.js",
-  "module": "index.js",
-  "jsnext:main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/prop-types.common.js",
+  "module": "src/index.js",
+  "jsnext:main": "src/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test:cov": "nyc ava *.test.js && nyc report --reporter=text-lcov > coverage.lcov",
-    "test": "npm run lint && ava *.test.js",
+    "test": "npm run lint && ava src/*.test.js",
     "lint": "xo",
-    "build": "babel -o prop-types.js index.js",
+    "build": "BABEL_ENV=build rollup -c",
+    "postbuild": "cp types/index.js.flow dist/prop-types.common.js.flow",
     "prepare": "npm test && npm run build",
     "prepublishOnly": "./publish.sh \"${AUTO_PUBLISH:-fail}\""
   },
@@ -32,13 +33,14 @@
   "homepage": "https://github.com/znck/vue-prop-types#readme",
   "devDependencies": {
     "ava": "^0.23.0",
-    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-plugin-transform-es2015-parameters": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "eslint-config-rem": "^3.2.0",
+    "rollup": "^0.51.5",
+    "rollup-plugin-babel": "^3.0.2",
     "xo": "^0.18.2"
   },
   "ava": {
@@ -55,6 +57,7 @@
     ]
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "nyc": "^11.3.0"
   }
 }

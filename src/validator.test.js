@@ -1,5 +1,5 @@
 import test from 'ava'
-import PropTypes, { runValidation } from './index'
+import PropTypes, { runValidation } from './validator'
 
 test('runValidation', t => {
   t.true(runValidation(PropTypes.number.isRequired, 1))
@@ -49,7 +49,7 @@ test('instanceOf', t => {
 })
 
 test('oneOf', t => {
-  t.deepEqual([Number, String], PropTypes.oneOf(1, 'foo', 2, 'bar').type)
+  t.deepEqual([], PropTypes.oneOf(1, 'foo', 2, 'bar').type)
 
   const prop = PropTypes.oneOf(1, 'foo')
 
@@ -63,6 +63,7 @@ test('oneOf', t => {
 
 test('oneOfType', t => {
   t.deepEqual([Number, String], PropTypes.oneOfType(PropTypes.number, String).type)
+  t.deepEqual([Number, String], PropTypes.oneOfType(PropTypes.number, String, () => false).type)
   t.deepEqual([Number, String], PropTypes.oneOfType([PropTypes.number, String]).type)
 
   t.true(PropTypes.oneOfType(PropTypes.number, String).isRequired.required)
@@ -118,4 +119,15 @@ test('nested shape', t => {
   t.false(prop.validator({ foo: 'bar', bar: { bax: 'bax' } }))
   t.false(prop.validator({ bar: { bax: 1 } }))
   t.false(prop.validator({ foo: 'bar', bar: { } }))
+})
+
+test('modifiers', t => {
+  const prop = PropTypes.string.modifiers(/* name = */'size', 'mobile', 'desktop')
+
+  t.true('size' in prop)
+  t.true('size.mobile' in prop)
+  t.true('size.desktop' in prop)
+  t.deepEqual([String], prop.size.type)
+  t.deepEqual([String], prop['size.mobile'].type)
+  t.deepEqual([String], prop['size.desktop'].type)
 })

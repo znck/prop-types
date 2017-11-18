@@ -1,3 +1,5 @@
+import { flatten } from 'lodash'
+
 class PropShim {
   _required() {
     this.required = true
@@ -9,7 +11,7 @@ class PropShim {
     return this._required()
   }
 
-  use(value) {
+  value(value) {
     this.default = value
 
     return this
@@ -17,6 +19,18 @@ class PropShim {
 
   validate() {
     return this
+  }
+
+  modifiers(name, ...modifiers) {
+    const props = {
+      [name]: this
+    }
+
+    flatten(modifiers).forEach(modifier => {
+      props[`${name}.${modifier}`] = {}
+    })
+
+    return props
   }
 }
 
