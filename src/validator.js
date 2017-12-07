@@ -1,5 +1,7 @@
 import { flatten, includes, isFunction, isObjectLike, each, every, some } from 'lodash'
 
+const { version } = require('../package.json')
+
 export function runValidation(validator, value, strict = false) {
   const types = ensureArray(validator.type)
 
@@ -12,10 +14,35 @@ export function runValidation(validator, value, strict = false) {
   )
 }
 
+const TYPES = {
+  string: String,
+  number: Number,
+  object: Object,
+  boolean: Boolean,
+  function: Function,
+  symbol: Symbol,
+  array: Array
+}
+
 export default class PropType {
   /** @private */
   constructor(type) {
-    this.type = ensureArray(type)
+    this.type = type
+  }
+
+  static get version() {
+    return version
+  }
+
+  get type() {
+    switch (this._type.length) {
+      case 0: return
+      case 1: return this._type[0]
+      default: return this._type
+    }
+  }
+  set type(value) {
+    this._type = ensureArray(value)
   }
 
   get isRequired() {
@@ -115,7 +142,8 @@ export default class PropType {
 
     ensureOne(values)
 
-    const prop = this.create()
+    const types = [...new Set(values.map(value => TYPES[typeof value] || Object))]
+    const prop = this.create(types)
 
     values = new Set(values)
 
@@ -131,7 +159,7 @@ export default class PropType {
 
     ensureOne(types)
 
-    const prop = this.create(flatten(types.map(type => type.type)))
+    const prop = this.create(flatten(types.map(type => ensureArray(type.type))))
     const validators = types.filter(type => type.validator)
 
     if (validators.length > 0) {
@@ -179,16 +207,6 @@ export default class PropType {
 
     return prop
   }
-}
-
-const TYPES = {
-  string: String,
-  number: Number,
-  object: Object,
-  boolean: Boolean,
-  function: Function,
-  symbol: Symbol,
-  array: Array
 }
 
 function isType(type, item, nullAllowed = false) {

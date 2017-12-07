@@ -12,44 +12,44 @@ test('runValidation', t => {
 })
 
 test('optional types', t => {
-  t.deepEqual([String], PropTypes.string.type)
-  t.deepEqual([Number], PropTypes.number.type)
-  t.deepEqual([Boolean], PropTypes.bool.type)
-  t.deepEqual([Object], PropTypes.object.type)
-  t.deepEqual([Array], PropTypes.array.type)
-  t.deepEqual([Symbol], PropTypes.symbol.type)
+  t.deepEqual([String], PropTypes.string._type)
+  t.deepEqual([Number], PropTypes.number._type)
+  t.deepEqual([Boolean], PropTypes.bool._type)
+  t.deepEqual([Object], PropTypes.object._type)
+  t.deepEqual([Array], PropTypes.array._type)
+  t.deepEqual([Symbol], PropTypes.symbol._type)
 })
 
 test('required types', t => {
-  t.deepEqual([String], PropTypes.string.isRequired.type)
+  t.deepEqual([String], PropTypes.string.isRequired._type)
   t.true(PropTypes.string.isRequired.required)
 
-  t.deepEqual([Number], PropTypes.number.isRequired.type)
+  t.deepEqual([Number], PropTypes.number.isRequired._type)
   t.true(PropTypes.number.isRequired.required)
 
-  t.deepEqual([Boolean], PropTypes.bool.isRequired.type)
+  t.deepEqual([Boolean], PropTypes.bool.isRequired._type)
   t.true(PropTypes.bool.isRequired.required)
 
-  t.deepEqual([Object], PropTypes.object.isRequired.type)
+  t.deepEqual([Object], PropTypes.object.isRequired._type)
   t.true(PropTypes.object.isRequired.required)
 
-  t.deepEqual([Array], PropTypes.array.isRequired.type)
+  t.deepEqual([Array], PropTypes.array.isRequired._type)
   t.true(PropTypes.array.isRequired.required)
 
-  t.deepEqual([Symbol], PropTypes.symbol.isRequired.type)
+  t.deepEqual([Symbol], PropTypes.symbol.isRequired._type)
   t.true(PropTypes.symbol.isRequired.required)
 })
 
 test('instanceOf', t => {
   class Foo {}
 
-  t.deepEqual([Foo], PropTypes.instanceOf(Foo).type)
+  t.deepEqual([Foo], PropTypes.instanceOf(Foo)._type)
 
-  t.deepEqual([Foo], PropTypes.instanceOf(Foo).isRequired.type)
+  t.deepEqual([Foo], PropTypes.instanceOf(Foo).isRequired._type)
 })
 
 test('oneOf', t => {
-  t.deepEqual([], PropTypes.oneOf(1, 'foo', 2, 'bar').type)
+  t.deepEqual([Number, String], PropTypes.oneOf(1, 'foo', 2, 'bar')._type)
 
   const prop = PropTypes.oneOf(1, 'foo')
 
@@ -62,9 +62,9 @@ test('oneOf', t => {
 })
 
 test('oneOfType', t => {
-  t.deepEqual([Number, String], PropTypes.oneOfType(PropTypes.number, String).type)
-  t.deepEqual([Number, String], PropTypes.oneOfType(PropTypes.number, String, () => false).type)
-  t.deepEqual([Number, String], PropTypes.oneOfType([PropTypes.number, String]).type)
+  t.deepEqual([Number, String], PropTypes.oneOfType(PropTypes.number, String)._type)
+  t.deepEqual([Number, String], PropTypes.oneOfType(PropTypes.number, String, () => false)._type)
+  t.deepEqual([Number, String], PropTypes.oneOfType([PropTypes.number, String])._type)
 
   t.true(PropTypes.oneOfType(PropTypes.number, String).isRequired.required)
 
@@ -76,8 +76,8 @@ test('oneOfType', t => {
 })
 
 test('arrayOf', t => {
-  t.deepEqual([Array], PropTypes.arrayOf(PropTypes.number).type)
-  t.deepEqual([Array], PropTypes.arrayOf(PropTypes.number).isRequired.type)
+  t.deepEqual([Array], PropTypes.arrayOf(PropTypes.number)._type)
+  t.deepEqual([Array], PropTypes.arrayOf(PropTypes.number).isRequired._type)
 
   const prop = PropTypes.arrayOf(PropTypes.number)
 
@@ -86,8 +86,8 @@ test('arrayOf', t => {
 })
 
 test('objectOf', t => {
-  t.deepEqual([Object], PropTypes.objectOf(PropTypes.object).type)
-  t.deepEqual([Object], PropTypes.objectOf(PropTypes.object).isRequired.type)
+  t.deepEqual([Object], PropTypes.objectOf(PropTypes.object)._type)
+  t.deepEqual([Object], PropTypes.objectOf(PropTypes.object).isRequired._type)
 
   const prop = PropTypes.objectOf(PropTypes.number)
 
@@ -96,8 +96,8 @@ test('objectOf', t => {
 })
 
 test('shape', t => {
-  t.deepEqual([Object], PropTypes.shape({}).type)
-  t.deepEqual([Object], PropTypes.shape({}).isRequired.type)
+  t.deepEqual([Object], PropTypes.shape({})._type)
+  t.deepEqual([Object], PropTypes.shape({}).isRequired._type)
 
   const prop = PropTypes.shape({ foo: PropTypes.string.isRequired })
 
@@ -127,7 +127,7 @@ test('modifiers', t => {
   t.true('size' in prop)
   t.true('size.mobile' in prop)
   t.true('size.desktop' in prop)
-  t.deepEqual([String], prop.size.type)
-  t.deepEqual([String], prop['size.mobile'].type)
-  t.deepEqual([String], prop['size.desktop'].type)
+  t.deepEqual([String], prop.size._type)
+  t.deepEqual([String], prop['size.mobile']._type)
+  t.deepEqual([String], prop['size.desktop']._type)
 })
