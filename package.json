@@ -6,6 +6,13 @@
   "module": "src/index.js",
   "jsnext:main": "src/index.js",
   "types": "types/index.d.ts",
+  "files": [
+    "dist/",
+    "src/",
+    "types/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "test:cov": "nyc ava src/*.test.js && nyc report --reporter=text-lcov > coverage.lcov",
     "test": "npm run lint && ava src/*.test.js",
