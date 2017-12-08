@@ -156,13 +156,10 @@ export default class PropType {
     ensureOne(types)
 
     const prop = this.create(flatten(types.map(type => ensureArray(type.type))))
-    const validators = types.filter(type => type.validator)
 
-    if (validators.length > 0) {
-      prop.validator = value => validators.some(
-        validator => runValidation(validator, value)
-      )
-    }
+    prop.validator = value => types.some(
+      validator => runValidation(validator, value)
+    )
 
     return prop
   }
