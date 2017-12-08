@@ -17,7 +17,7 @@ export default function normalizer(
 
   keys.forEach(key => {
     if (!isDot.test(key)) return
-    const [name, modifier] = key.split('.')
+    const [name, modifier] = key.split('$')
 
     modifiers[name] = modifiers[name] || []
     modifiers[name].push(modifier)
@@ -31,7 +31,7 @@ export default function normalizer(
         normalized[name] = props[name] === undefined ? undefined : transform(name, props[name])
         modifiers[name] && modifiers[name].forEach(
           suffix => {
-            const key = `${name}.${suffix}`
+            const key = `${name}$${suffix}`
             if (props[key] !== undefined) {
               normalized[name] = [
                 ...toArray(normalized[name]),

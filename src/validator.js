@@ -35,11 +35,7 @@ export default class PropType {
   }
 
   get type() {
-    switch (this._type.length) {
-      case 0: return
-      case 1: return this._type[0]
-      default: return this._type
-    }
+    return this._type
   }
   set type(value) {
     this._type = ensureArray(value)
@@ -81,7 +77,7 @@ export default class PropType {
     }
 
     flatten(modifiers).forEach(modifier => {
-      props[`${name}.${modifier}`] = PropType.clone(this)
+      props[`${name}$${modifier}`] = PropType.clone(this)
     })
 
     return props

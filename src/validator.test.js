@@ -125,9 +125,9 @@ test('modifiers', t => {
   const prop = PropTypes.string.modifiers(/* name = */'size', 'mobile', 'desktop')
 
   t.true('size' in prop)
-  t.true('size.mobile' in prop)
-  t.true('size.desktop' in prop)
+  t.true('size$mobile' in prop)
+  t.true('size$desktop' in prop)
   t.deepEqual([String], prop.size._type)
-  t.deepEqual([String], prop['size.mobile']._type)
-  t.deepEqual([String], prop['size.desktop']._type)
+  t.deepEqual([String], prop.size$mobile._type)
+  t.deepEqual([String], prop.size$desktop._type)
 })
