@@ -2,11 +2,17 @@ import babel from 'rollup-plugin-babel'
 
 export default {
   input: 'src/index.js',
-  output: {
-    file: 'dist/prop-types.common.js',
-    format: 'cjs',
-    exports: 'named'
-  },
+  output: [
+    {
+      file: 'dist/prop-types.common.js',
+      format: 'cjs',
+      exports: 'named'
+    },
+    {
+      file: 'dist/prop-types.js',
+      format: 'es'
+    }
+  ],
   external: ['lodash'],
   plugins: [
     babel({

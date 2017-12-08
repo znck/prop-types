@@ -3,8 +3,8 @@
   "version": "0.3.1",
   "description": "Fluent prop validation for Vue",
   "main": "dist/prop-types.common.js",
-  "module": "src/index.js",
-  "jsnext:main": "src/index.js",
+  "module": "dist/prop-types.js",
+  "jsnext:main": "dist/prop-types.js",
   "types": "types/index.d.ts",
   "files": [
     "dist/",
@@ -18,7 +18,7 @@
     "test": "npm run lint && ava src/*.test.js",
     "lint": "xo",
     "build": "BABEL_ENV=build rollup -c",
-    "postbuild": "cp types/index.js.flow dist/prop-types.common.js.flow",
+    "postbuild": "cp types/index.js.flow dist/prop-types.common.js.flow && cp types/index.js.flow dist/prop-types.js.flow",
     "prepare": "npm test && npm run build",
     "prepublishOnly": "./publish.sh \"${AUTO_PUBLISH:-fail}\""
   },
