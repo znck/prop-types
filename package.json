@@ -48,6 +48,7 @@
     "eslint-config-rem": "^3.2.0",
     "rollup": "^0.51.5",
     "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-json": "^2.3.0",
     "xo": "^0.18.2"
   },
   "ava": {

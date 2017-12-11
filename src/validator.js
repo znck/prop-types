@@ -1,6 +1,5 @@
 import { flatten, includes, isFunction, isObjectLike, each, every, some } from 'lodash'
-
-const { version } = require('../package.json')
+import { version } from '../package.json' // eslint-disable-line import/extensions
 
 export function runValidation(validator, value, strict = false) {
   const types = ensureArray(validator.type)

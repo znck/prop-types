@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel'
+import json from 'rollup-plugin-json'
 
 export default {
   input: 'src/index.js',
@@ -15,6 +16,7 @@ export default {
   ],
   external: ['lodash'],
   plugins: [
+    json(),
     babel({
       babelrc: false,
       presets: [
