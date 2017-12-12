@@ -14,7 +14,7 @@ export default {
       format: 'es'
     }
   ],
-  external: ['lodash'],
+  external: ['lodash-es'],
   plugins: [
     json(),
     babel({

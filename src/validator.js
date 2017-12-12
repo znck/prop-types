@@ -1,4 +1,4 @@
-import { flatten, includes, isFunction, isObjectLike, each, every, some } from 'lodash'
+import { flatten, includes, isFunction, isObjectLike, each, every, some } from 'lodash-es'
 import { version } from '../package.json' // eslint-disable-line import/extensions
 
 export function runValidation(validator, value, strict = false) {

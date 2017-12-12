@@ -53,7 +53,7 @@
   },
   "ava": {
     "require": [
-      "babel-register"
+      "./setup.ava.js"
     ],
     "babel": "inherit"
   },
@@ -65,7 +65,7 @@
     ]
   },
   "dependencies": {
-    "lodash": "^4.17.4",
+    "lodash-es": "^4.17.4",
     "nyc": "^11.3.0"
   }
 }
