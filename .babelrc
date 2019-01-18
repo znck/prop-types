@@ -1,13 +1,3 @@
 {
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": 8
-      }
-    }]
-  ],
-  "plugins": [
-    "transform-object-rest-spread",
-    "transform-es2015-parameters"
-  ]
+  "presets": ["@babel/preset-env"]
 }

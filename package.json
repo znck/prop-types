@@ -2,9 +2,8 @@
   "name": "@znck/prop-types",
   "version": "0.3.4",
   "description": "Fluent prop validation for Vue",
-  "main": "dist/prop-types.common.js",
-  "module": "dist/prop-types.js",
-  "jsnext:main": "dist/prop-types.js",
+  "main": "dist/prop-types.js",
+  "module": "dist/prop-types.es.js",
   "types": "types/index.d.ts",
   "files": [
     "dist/",
@@ -14,13 +13,10 @@
     "LICENSE"
   ],
   "scripts": {
-    "test:cov": "nyc ava src/*.test.js && nyc report --reporter=text-lcov > coverage.lcov",
-    "test": "npm run lint && ava src/*.test.js",
-    "lint": "xo",
-    "build": "BABEL_ENV=build rollup -c",
-    "postbuild": "cp types/index.js.flow dist/prop-types.common.js.flow && cp types/index.js.flow dist/prop-types.js.flow",
-    "prepare": "npm test && npm run build",
-    "prepublishOnly": "./publish.sh \"${AUTO_PUBLISH:-fail}\""
+    "test": "jest",
+    "pre:build": "rm -rf dist",
+    ":build": "rollup -c --environment BUILD:production",
+    "prepublishOnly": "npm run :build"
   },
   "repository": {
     "type": "git",
@@ -39,33 +35,13 @@
   },
   "homepage": "https://github.com/znck/vue-prop-types#readme",
   "devDependencies": {
-    "ava": "^0.23.0",
-    "babel-core": "^6.26.0",
-    "babel-plugin-transform-es2015-parameters": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.26.0",
-    "eslint-config-rem": "^3.2.0",
-    "nyc": "^11.3.0",
-    "rollup": "^0.51.5",
-    "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-json": "^2.3.0",
-    "xo": "^0.18.2"
-  },
-  "ava": {
-    "require": [
-      "./setup.ava.js"
-    ],
-    "babel": "inherit"
-  },
-  "xo": {
-    "extends": "rem",
-    "envs": [
-      "es6",
-      "shared-node-browser"
-    ]
-  },
-  "dependencies": {
-    "lodash-es": "^4.17.4"
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "regenerator-runtime": "^0.13.1",
+    "rollup": "^1.1.0",
+    "rollup-plugin-babel": "^4.3.1"
   }
 }

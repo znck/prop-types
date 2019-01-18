@@ -1,4 +1,4 @@
-import PropTypes, { normalize } from './index.d'
+import PropTypes, { normalize } from '.'
 
 class Foo {}
 
@@ -23,3 +23,7 @@ PropTypes.oneOfType(PropTypes.any, String, Foo, Int16Array)
 PropTypes.shape({ foo: PropTypes.any, bar: String, baz: Foo, qux: Int16Array })
 PropTypes.string
 PropTypes.symbol
+
+const props = {
+  foo: PropTypes.any
+}
