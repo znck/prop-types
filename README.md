@@ -1,5 +1,5 @@
 <div class="text-xs-center" align="center" style="margin: 20px">
-  <img src="./docs/logo.png" height="255" alt="prop-types">
+  <img src="./logo.png" height="255" alt="prop-types">
 </div><br><br>
 
 <div class="text-xs-center" align="center">
