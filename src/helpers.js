@@ -1,4 +1,4 @@
-import PropType from './index'
+import PropTypes from './index'
 
 export const TYPES = {
   string: String,
@@ -45,11 +45,11 @@ export function ensureArray(value) {
 }
 
 export function normalizeType(type) {
-  if (type instanceof PropType) return type
+  if (type instanceof PropTypes) return type
 
-  if (type in TYPES) return PropType.create(TYPES[type])
+  if (type in TYPES) return PropTypes.create(TYPES[type])
 
-  if (typeValues.includes(type)) return PropType.create(type)
+  if (typeValues.includes(type)) return PropTypes.create(type)
 
   if (typeof type === 'function') return { validator: type, type: [] }
 

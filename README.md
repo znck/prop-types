@@ -90,10 +90,6 @@ export default {
 
     // You can also supply a custom validator.
     customArrayProp: PropTypes.string.validate(value => value === 'foo'),
-
-    // You create similar props using modifiers.
-    // Following would create 4 props, namely `size`, `size.mobile`, `size.tablet` and `size.desktop`.
-    ...PropTypes.string.modifiers(/* name =*/'size', ['mobile', 'tablet', 'desktop'])
   }
 }
 </script>

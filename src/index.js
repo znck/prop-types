@@ -6,7 +6,8 @@ import {
   TYPES,
 } from './helpers'
 
-export default class PropType {
+/** @type {import('../types/index')} */
+export default class PropTypes {
   /** @private */
   constructor(type) {
     this.type = type
@@ -52,7 +53,7 @@ export default class PropType {
 
   /** @private */
   static create(type) {
-    return new PropType(type)
+    return new PropTypes(type)
   }
 
   /** @private */
