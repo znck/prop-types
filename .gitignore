@@ -6,3 +6,4 @@ prop-types.js
 yarn.lock
 shrinkwrap.yaml
 coverage.lcov
+remove.js
