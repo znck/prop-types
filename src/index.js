@@ -1,9 +1,9 @@
 import {
   runValidation,
   ensureArray,
-  normalizeType,
   ensureOne,
   TYPES,
+  typeValues,
 } from './helpers'
 
 /** @type {import('../types/index')} */
@@ -181,4 +181,16 @@ export default class PropTypes {
       console.error(e)
     }
   }
+}
+
+function normalizeType(type) {
+  if (type instanceof PropTypes) return type
+
+  if (type in TYPES) return PropTypes.create(TYPES[type])
+
+  if (typeValues.includes(type)) return PropTypes.create(type)
+
+  if (typeof type === 'function') return { validator: type, type: [] }
+
+  return type
 }

@@ -1,5 +1,3 @@
-import PropTypes from './index'
-
 export const TYPES = {
   string: String,
   number: Number,
@@ -42,16 +40,4 @@ export function ensureOne(items) {
 
 export function ensureArray(value) {
   return Array.isArray(value) ? value : value === undefined ? [] : [value]
-}
-
-export function normalizeType(type) {
-  if (type instanceof PropTypes) return type
-
-  if (type in TYPES) return PropTypes.create(TYPES[type])
-
-  if (typeValues.includes(type)) return PropTypes.create(type)
-
-  if (typeof type === 'function') return { validator: type, type: [] }
-
-  return type
 }
