@@ -16,7 +16,8 @@
 
 Fluent prop validation for Vue that won't land in your production code.
 
-> It uses `process.env.NODE_ENV` to detect production build.
+> It uses `process.env.NODE_ENV !== 'production'` to detect production build.
+> Use `rollup-plugin-replace` for rollup and `DefinePlugin` for webpack.
 
 ## Usage
 
@@ -31,6 +32,15 @@ npm install --save @znck/prop-types
 ```js
 import PropTypes from '@znck/prop-types'; // ES6
 var PropTypes = require('@znck/prop-types'); // ES5 with npm
+```
+
+```js
+// babel.config.js or .babelrc.js
+...
+  plugins: [
+    '@znck/prop-types/replace'
+  ]
+...
 ```
 
 Here is an example of using PropTypes with a Vue component, which also
