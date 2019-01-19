@@ -49,5 +49,6 @@
   },
   "dependencies": {
     "vue": "2.*"
-  }
+  },
+  "sideEffects": false
 }

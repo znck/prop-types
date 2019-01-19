@@ -157,14 +157,14 @@ export default class PropTypes {
     const prop = this.create(Object)
     const shapeType = {}
 
-    Object.entries(shape).forEach(([key, value]) => {
+    Object.entries(shape).forEach(({0: key, 1: value}) => {
       shapeType[key] = normalizeType(value)
     })
 
     prop.validator = value => {
       if (!(value && typeof value === 'object')) return prop.required !== true
 
-      return Object.entries(shapeType).every(([key, type]) =>
+      return Object.entries(shapeType).every(({0: key, 1: type}) =>
         runValidation(type, value[key])
       )
     }
@@ -188,7 +188,7 @@ function normalizeType(type) {
 
   if (type in TYPES) return PropTypes.create(TYPES[type])
 
-  if (typeValues.includes(type)) return PropTypes.create(type)
+  if (typeValues().includes(type)) return PropTypes.create(type)
 
   if (typeof type === 'function') return { validator: type, type: [] }
 

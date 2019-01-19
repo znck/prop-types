@@ -8,8 +8,8 @@ export const TYPES = {
   array: Array,
 }
 
-export const typeNames = Object.keys(TYPES)
-export const typeValues = Object.values(TYPES)
+export const typeNames = () => Object.keys(TYPES)
+export const typeValues = () => Object.values(TYPES)
 
 export function runValidation(validator, value, strict = false) {
   const types = ensureArray(validator.type)
@@ -29,7 +29,7 @@ export function isType(type, item, nullAllowed = false) {
   if (Array === type && Array.isArray(item)) return true
 
   return Object.entries(TYPES).some(
-    ([key, TYPE]) => TYPE === type && typeof item === key // eslint-disable-line valid-typeof
+    ({ 0: key, 1: TYPE }) => TYPE === type && typeof item === key // eslint-disable-line valid-typeof
   )
 }
 

@@ -4,9 +4,7 @@ import pkg from './package.json'
 const banner = `
 /**
  * ${pkg.name} v${pkg.version}
- * (c) ${new Date().getFullYear()} ${pkg.author.name} <${pkg.author.email}> (${
-  pkg.author.url
-})
+ * (c) ${new Date().getFullYear()} ${pkg.author}
  * @license ${pkg.license}
  */`.trim()
 

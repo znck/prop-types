@@ -24,15 +24,24 @@ export default function(babel) {
 
         path.node._processed = true
 
-        const prop = path.findParent(path => path.isObjectProperty())
+        let prop = path.findParent(path => path.isObjectProperty())
 
         if (prop) {
-          if (oldProps) {
-            prop.skip()
-            path.stop()
-            return
-          }
+          const props = prop.parentPath
+          if (props && props.isObjectExpression()) {
+            const api = props.parentPath
+            if (
+              api &&
+              api.isObjectProperty() &&
+              api.get('key').isIdentifier({ name: 'props' })
+            ) {
+              // continue
+              prop = prop
+            } else prop = null
+          } else prop = null
+        }
 
+        if (prop) {
           const info = {}
 
           prop.get('value').traverse({
@@ -127,11 +136,12 @@ export default function(babel) {
               newProps = t.arrayExpression(properties)
             }
 
-            oldProps.replaceWith(
-              babel.template.ast`process.env.NODE_ENV !== 'production' ? ${
-                oldProps.node
-              } : ${newProps}`
-            )
+            const node = babel.template
+              .ast`process.env.NODE_ENV !== 'production' ? ${
+              oldProps.node
+            } : ${newProps}`
+
+            oldProps.replaceWith(node)
           }
         } else {
           const statement = path.findParent(path =>
