@@ -3,7 +3,7 @@ export default function(babel) {
   let name = 'PropTypes'
   let hasPropTypes = false
 
-  let newProps = t.objectExpression([])
+  let newProps
   let oldProps
 
   return {
@@ -15,6 +15,7 @@ export default function(babel) {
           name = path.node.specifiers.find(
             s => s.type === 'ImportDefaultSpecifier'
           ).local.name
+          newProps = oldProps = undefined
         }
       },
       Identifier(path) {
@@ -44,9 +45,11 @@ export default function(babel) {
         if (prop) {
           const info = {}
 
+          if (!newProps) newProps = t.objectExpression([])
+
           prop.get('value').traverse({
             Identifier(path) {
-              if (path.isIdentifier({ name: 'boolean' })) {
+              if (path.isIdentifier({ name: 'bool' })) { // Maybe check PropTypes.bool
                 info.isBoolean = true
               } else if (path.isIdentifier({ name: 'value' })) {
                 const call = path.findParent(path => path.isCallExpression())
@@ -67,22 +70,11 @@ export default function(babel) {
 
           if (info.isBoolean) {
             if (info.default) {
-              if (info.default.isBooleanLiteral({ value: false })) {
-                newProps.properties.push(
-                  t.objectProperty(
-                    t.identifier(prop.node.key.name),
-                    t.identifier('Boolean')
-                  )
-                )
-              } else {
+              if (info.default.isBooleanLiteral({ value: true })) {
                 newProps.properties.push(
                   t.objectProperty(
                     t.identifier(prop.node.key.name),
                     t.objectExpression([
-                      t.objectProperty(
-                        t.identifier('type'),
-                        t.identifier('Boolean')
-                      ),
                       t.objectProperty(
                         t.identifier('default'),
                         t.booleanLiteral(true)
@@ -91,13 +83,6 @@ export default function(babel) {
                   )
                 )
               }
-            } else {
-              newProps.properties.push(
-                t.objectProperty(
-                  t.identifier(prop.node.key.name),
-                  t.identifier('Boolean')
-                )
-              )
             }
           } else if (info.default) {
             newProps.properties.push(
@@ -142,6 +127,7 @@ export default function(babel) {
             } : ${newProps}`
 
             oldProps.replaceWith(node)
+            newProps = undefined
           }
         } else {
           const statement = path.findParent(path =>
