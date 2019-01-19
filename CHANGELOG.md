@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.1"></a>
+## [0.4.1](https://github.com/znck/vue-prop-types/compare/v0.4.0...v0.4.1) (2019-01-19)
+
+
+### Bug Fixes
+
+* Reset local variables ([6fb0fd1](https://github.com/znck/vue-prop-types/commit/6fb0fd1))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/znck/vue-prop-types/compare/v0.4.0-alpha.3...v0.4.0) (2019-01-19)
 
