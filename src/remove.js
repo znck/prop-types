@@ -49,7 +49,8 @@ export default function(babel) {
 
           prop.get('value').traverse({
             Identifier(path) {
-              if (path.isIdentifier({ name: 'bool' })) { // Maybe check PropTypes.bool
+              if (path.isIdentifier({ name: 'bool' })) {
+                // Maybe check PropTypes.bool
                 info.isBoolean = true
               } else if (path.isIdentifier({ name: 'value' })) {
                 const call = path.findParent(path => path.isCallExpression())
@@ -82,7 +83,21 @@ export default function(babel) {
                     ])
                   )
                 )
+              } else {
+                newProps.properties.push(
+                  t.objectProperty(
+                    t.identifier(prop.node.key.name),
+                    t.objectExpression([])
+                  )
+                )
               }
+            } else {
+              newProps.properties.push(
+                t.objectProperty(
+                  t.identifier(prop.node.key.name),
+                  t.objectExpression([])
+                )
+              )
             }
           } else if (info.default) {
             newProps.properties.push(
