@@ -35,6 +35,14 @@ export interface PropTypes {
   arrayOf<T>(type: PropValidator<T>): PropValidator<Array<T>>
   arrayOf<T>(type: ValidatorFn<T>): PropValidator<Array<T>>
 
+  oneOf<T>(...args: T[]): PropValidator<T>
+  oneOf<T1>(arg1: T1): PropValidator<T1 | T2 | T3 | T4>
+  oneOf<T1, T2>(arg1: T1, arg2: T2): PropValidator<T1 | T2 | T3 | T4>
+  oneOf<T1, T2, T3>(arg1: T1, arg2: T2, arg3: T3): PropValidator<T1 | T2 | T3 | T4>
+  oneOf<T1, T2, T3, T4>(arg1: T1, arg2: T2, arg3: T3, arg4: T4): PropValidator<T1 | T2 | T3 | T4>
+  oneOf<T1, T2, T3, T4, T5>(arg1: T1, arg2: T2, arg3: T3, arg4: T4, arg5: T5): PropValidator<T1 | T2 | T3 | T4 | T5>
+  oneOf<T1, T2, T3, T4, T5, T6>(arg1: T1, arg2: T2, arg3: T3, arg4: T4, arg5: T5, arg6: T6): PropValidator<T1 | T2 | T3 | T4 | T5 | T6>
+
   oneOfType<T1>(t1: T1): PropValidator<Infer<T1>>
   oneOfType<T1, T2>(t1: T1, t2: T2): PropValidator<Infer<T1 | T2>>
   oneOfType<T1, T2, T3>(

@@ -25,13 +25,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       - run:
-          name: check code style
-          command: npm run lint
-
-      - run:
           name: test
-          command: npm run test:cov
-
-      - run:
-          name: upload coverage
-          command: bash <(curl -s https://codecov.io/bash)
+          command: npm test
