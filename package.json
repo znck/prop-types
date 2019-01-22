@@ -1,6 +1,6 @@
 {
   "name": "@znck/prop-types",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Fluent prop validation for Vue",
   "main": "dist/prop-types.js",
   "module": "dist/prop-types.es.js",
