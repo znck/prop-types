@@ -32,6 +32,12 @@ export default class PropTypes {
     return this
   }
 
+  description(description) {
+    this.description = description
+
+    return this
+  }
+
   validate(cb) {
     if (!(typeof cb === 'function')) return this
 

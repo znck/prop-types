@@ -108,6 +108,7 @@ export interface PropTypesChain<
   isRequired: PropOptions<T>
   value(value: U): PropValidator<T>
   validate: (value: ValidatorFn<T>) => PropValidator<T>
+  description: (value: string) => PropValidator<T> & { description: string }
 }
 
 export type PropValidator<T> = PropTypesChain<T> & PropOptions<T>
