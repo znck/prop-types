@@ -4,6 +4,7 @@ import {
   ensureOne,
   TYPES,
   typeValues,
+  flat
 } from './helpers'
 
 /** @type {import('../types/index')} */
@@ -108,13 +109,11 @@ export default class PropTypes {
   }
 
   static oneOf(...values) {
-    values = values.flat()
+    values = flat(values)
 
     ensureOne(values)
 
-    const types = [
-      ...new Set(values.map(value => TYPES[typeof value] || Object)),
-    ]
+    const types = Array.from(new Set(values.map(value => TYPES[typeof value] || Object)))
     const prop = this.create(types)
     const setOfValues = new Set(values)
 
@@ -126,11 +125,11 @@ export default class PropTypes {
   }
 
   static oneOfType(...types) {
-    types = types.flat().map(normalizeType)
+    types = flat(types).map(normalizeType)
 
     ensureOne(types)
 
-    const prop = this.create(types.map(type => ensureArray(type.type)).flat())
+    const prop = this.create(flat(types.map(type => ensureArray(type.type))))
 
     prop.validator = value =>
       types.some(validator => runValidation(validator, value))
@@ -149,7 +148,7 @@ export default class PropTypes {
   /** @private */
   static collectionOf(type, expected) {
     const prop = this.create(type)
-    const types = expected.flat().map(normalizeType)
+    const types = flat(expected).map(normalizeType)
 
     prop.validator = value =>
       Object.values(value).every(item =>

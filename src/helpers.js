@@ -10,6 +10,11 @@ export const TYPES = {
 
 export const typeNames = () => Object.keys(TYPES)
 export const typeValues = () => Object.values(TYPES)
+export function flat(arr) {
+  if (typeof arr.flat === 'function') return arr.flat()
+
+  return Array.prototype.concat.apply([], arr)
+}
 
 export function runValidation(validator, value, strict = false) {
   const types = ensureArray(validator.type)
