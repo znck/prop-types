@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1"></a>
+## [0.5.1](https://github.com/znck/vue-prop-types/compare/v0.5.0...v0.5.1) (2019-01-26)
+
+
+### Bug Fixes
+
+* Use Array.concat as fallback to Array.flat ([df7c646](https://github.com/znck/vue-prop-types/commit/df7c646))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/znck/vue-prop-types/compare/v0.4.3...v0.5.0) (2019-01-23)
 
