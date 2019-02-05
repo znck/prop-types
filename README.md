@@ -17,7 +17,7 @@
 Fluent prop validation for Vue that won't land in your production code.
 
 > Use [rollup-plugin-replace](https://github.com/rollup/rollup-plugin-replace) or [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) to replace `process.env.NODE_ENV`  with `'production'`.  
-> If you are using Vue CLI, it's already done for you.
+> If you are using Vue CLI or Nuxt, it's already done for you.
 
 ## Usage
 
