@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.4"></a>
+## <small>0.5.4 (2019-02-10)</small>
+
+* chore: Remove .npmignore and use files option ([5d3ed99](https://github.com/znck/vue-prop-types/commit/5d3ed99))
+
+
+
 <a name="0.5.3"></a>
 ## <small>0.5.3 (2019-02-10)</small>
 
