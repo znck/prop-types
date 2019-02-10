@@ -137,12 +137,12 @@ export default class PropTypes {
     return prop
   }
 
-  static arrayOf(...expected) {
-    return this.collectionOf(Array, expected)
+  static arrayOf() {
+    return this.collectionOf(Array, Array.from(arguments))
   }
 
-  static objectOf(...expected) {
-    return this.collectionOf(Object, expected)
+  static objectOf() {
+    return this.collectionOf(Object, Array.from(arguments))
   }
 
   /** @private */
@@ -151,7 +151,7 @@ export default class PropTypes {
     const types = flat(expected).map(normalizeType)
 
     prop.validator = value =>
-      Object.values(value).every(item =>
+      (type === Array ? value : Object.values(value)).every(item =>
         types.some(type => runValidation(type, item))
       )
 
