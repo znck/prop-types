@@ -8,7 +8,7 @@
   "files": [
     "dist/",
     "src/",
-    "types/",
+    "types/index.d.ts",
     "remove.js"
   ],
   "scripts": {
