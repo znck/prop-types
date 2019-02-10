@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.2"></a>
+## <small>0.5.2 (2019-02-10)</small>
+
+* chore: Use pnpm and test types ([5067a7f](https://github.com/znck/vue-prop-types/commit/5067a7f))
+* fix: Remove unnecessary variadic arguments ([5109471](https://github.com/znck/vue-prop-types/commit/5109471))
+* doc: Nuxt will also set NODE_ENV (#7) ([1500c9d](https://github.com/znck/vue-prop-types/commit/1500c9d)), closes [#7](https://github.com/znck/vue-prop-types/issues/7)
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/znck/vue-prop-types/compare/v0.5.0...v0.5.1) (2019-01-26)
 
