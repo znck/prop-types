@@ -7,3 +7,4 @@ yarn.lock
 shrinkwrap.yaml
 coverage.lcov
 /remove.js
+types/*.js

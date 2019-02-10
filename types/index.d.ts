@@ -36,9 +36,9 @@ export interface PropTypes {
   arrayOf<T>(type: ValidatorFn<T>): PropValidator<Array<T>>
 
   oneOf<T>(...args: T[]): PropValidator<T>
-  oneOf<T1>(arg1: T1): PropValidator<T1 | T2 | T3 | T4>
-  oneOf<T1, T2>(arg1: T1, arg2: T2): PropValidator<T1 | T2 | T3 | T4>
-  oneOf<T1, T2, T3>(arg1: T1, arg2: T2, arg3: T3): PropValidator<T1 | T2 | T3 | T4>
+  oneOf<T1>(arg1: T1): PropValidator<T1>
+  oneOf<T1, T2>(arg1: T1, arg2: T2): PropValidator<T1 | T2>
+  oneOf<T1, T2, T3>(arg1: T1, arg2: T2, arg3: T3): PropValidator<T1 | T2 | T3>
   oneOf<T1, T2, T3, T4>(arg1: T1, arg2: T2, arg3: T3, arg4: T4): PropValidator<T1 | T2 | T3 | T4>
   oneOf<T1, T2, T3, T4, T5>(arg1: T1, arg2: T2, arg3: T3, arg4: T4, arg5: T5): PropValidator<T1 | T2 | T3 | T4 | T5>
   oneOf<T1, T2, T3, T4, T5, T6>(arg1: T1, arg2: T2, arg3: T3, arg4: T4, arg5: T5, arg6: T6): PropValidator<T1 | T2 | T3 | T4 | T5 | T6>
@@ -89,20 +89,20 @@ export interface PropTypesChain<
   T,
   U = T extends string
     ? string
-    : T extends StringConstructor
+    : T extends String
     ? string
     : T extends number
     ? number
-    : T extends NumberConstructor
+    : T extends Number
     ? number
     : T extends boolean
     ? boolean
-    : T extends BooleanConstructor
+    : T extends Boolean
     ? boolean
+    : T extends symbol
+    ? symbol
     : T extends Symbol
-    ? Symbol
-    : T extends SymbolConstructor
-    ? Symbol
+    ? symbol
     : (() => T)
 > {
   isRequired: PropOptions<T>

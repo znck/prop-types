@@ -12,7 +12,9 @@
     "remove.js"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "npm run test:unit && npm run test:types",
+    "test:unit": "jest",
+    "test:types": "tsc types/index.spec.ts",
     "pre:build": "rm -rf dist/",
     ":build": "rollup -c --environment BUILD:production",
     "prepublishOnly": "npm run :build",
@@ -40,12 +42,12 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
-    "jest": "^23.6.0",
-    "regenerator-runtime": "^0.13.1",
+    "babel-jest": "^24.1.0",
+    "jest": "^24.1.0",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.3.1",
-    "standard-version": "^4.4.0"
+    "standard-version": "^4.4.0",
+    "typescript": "^3.3.3"
   },
   "dependencies": {
     "vue": "2.*"

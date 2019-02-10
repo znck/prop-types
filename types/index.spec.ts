@@ -9,7 +9,6 @@ const props = {
   string: PropTypes.string.value('foo').validate(value => 'foo' == value).isRequired,
   number: PropTypes.number.value(1).validate(value => 1 == value).isRequired,
   boolean: PropTypes.bool.value(true).validate(value => value).isRequired,
-  symbol: PropTypes.symbol.value(Symbol('1')).validate(value => !!value).isRequired,
   array: PropTypes.array.value(() => []).validate(value => 1 === value.length).isRequired,
   object: PropTypes.object.value(() => ({})).validate(value => 'foo' in value).isRequired,
   func: PropTypes.func.value(() => (a: string) => null).validate(value => value()).isRequired,
@@ -24,7 +23,7 @@ const props = {
   
   date: PropTypes.instanceOf(Date).value(() => new Date()).validate(value => value.getTime() > 0).isRequired,
   foo: PropTypes.instanceOf(Foo).value(() => new Foo()).validate(value => value.isValid).isRequired,
-  String: PropTypes.instanceOf(String).value(() => new String()).validate(value => value.at(0) > 'a').isRequired,
+  String: PropTypes.instanceOf(String).value(String('str')).validate(value => value.charAt(0) > 'a').isRequired,
 
   shape: PropTypes.shape({
     foo: PropTypes.bool,
@@ -34,7 +33,6 @@ const props = {
 
   objectOfNumber: PropTypes.objectOf(PropTypes.number).value(() => ({ foo: 1, bar: 2 })).validate(value => value.foo > 0).isRequired,
   objectOfString: PropTypes.objectOf(Number),
-  objectOfSymbol: PropTypes.objectOf(Symbol),
   objectOfValidatorInferredType: PropTypes.objectOf((value: { foo: boolean}) => value.foo).value(() => ({ one: { foo: true } })),
 }
 
