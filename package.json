@@ -52,5 +52,10 @@
   "dependencies": {
     "vue": "2.*"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
 }

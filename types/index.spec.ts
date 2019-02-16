@@ -29,7 +29,7 @@ const props = {
     foo: PropTypes.bool,
     bar: String,
     baz: PropTypes.instanceOf(Date)
-  }).value(() => ({ foo: true, bar: '' })).validate(value => value.foo),
+  }).defaultValue(() => ({ foo: true, bar: '' })).customValidator(value => value.foo),
 
   objectOfNumber: PropTypes.objectOf(PropTypes.number).value(() => ({ foo: 1, bar: 2 })).validate(value => value.foo > 0).isRequired,
   objectOfString: PropTypes.objectOf(Number),
@@ -37,6 +37,10 @@ const props = {
 }
 
 
-PropTypes.validate(() => {
-  // Any validation.
+const bar = PropTypes.run(({ tip, error, warn }) => {
+  return {
+    foo: true
+  }
 })
+
+const z: boolean = bar.foo

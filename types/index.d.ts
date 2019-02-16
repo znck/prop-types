@@ -2,7 +2,7 @@
 // Project: @znck/prop-types
 // Definitions by: Rahul Kadyan <https://znck.me>
 
-import { PropOptions } from 'vue'
+import Vue, { PropOptions } from 'vue'
 import { Prop } from 'vue/types/options'
 
 export as namespace PropTypes
@@ -82,7 +82,15 @@ export interface PropTypes {
   objectOf<T>(type: PropValidator<T>): PropValidator<{ [key: string]: T }> 
   objectOf<T>(type: ValidatorFn<T>): PropValidator<{ [key: string]: T }> 
   
-  validate(fn: () => void): void
+  validate(fn: (logger: ContextLogger) => void): void
+  run<R = any>(fn: (logger: ContextLogger) => R): R
+  run<R = any>(context: Vue, fn: (logger: ContextLogger) => R): R
+}
+
+export interface ContextLogger {
+  error(message: string): void
+  tip(message: string): void
+  warn(message: string): void
 }
 
 export interface PropTypesChain<
@@ -107,7 +115,9 @@ export interface PropTypesChain<
 > {
   isRequired: PropOptions<T>
   value(value: U): PropValidator<T>
+  defaultValue(value: U): PropValidator<T>
   validate: (value: ValidatorFn<T>) => PropValidator<T>
+  customValidator: (value: ValidatorFn<T>) => PropValidator<T>
   description: (value: string) => PropValidator<T> & { description: string }
 }
 

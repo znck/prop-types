@@ -4,7 +4,7 @@ import {
   ensureOne,
   TYPES,
   typeValues,
-  flat
+  flat,
 } from './helpers'
 
 /** @type {import('../types/index')} */
@@ -28,7 +28,13 @@ export default class PropTypes {
   }
 
   value(value) {
-    this.default = value && typeof value === 'object' ? () => value : value
+    console.warn(`'PropType.[type].value' is deprecated. Use 'PropType.[type].defaultValue' instead.`)
+
+    return this.defaultValue(value)
+  }
+
+  defaultValue(value) {
+    this.default = value
 
     return this
   }
@@ -40,6 +46,12 @@ export default class PropTypes {
   }
 
   validate(cb) {
+    console.warn(`'PropType.[type].validate' is deprecated. Use 'PropType.[type].customValidator' instead.`)
+
+    return this.customValidator(cb)
+  }
+
+  customValidator(cb) {
     if (!(typeof cb === 'function')) return this
 
     const validator = this.validator
@@ -73,39 +85,94 @@ export default class PropTypes {
   }
 
   static get string() {
-    return this.create(String)
+    const prop = this.create(String)
+    
+    prop.__meta__ = {
+      custom: 'any',
+    }
+
+    return prop
   }
 
   static get number() {
-    return this.create(Number)
+    const prop = this.create(Number)
+
+    prop.__meta__ = {
+      custom: 'number',
+    }
+
+    return prop
   }
 
   static get bool() {
-    return this.create(Boolean)
+    const prop = this.create(Boolean)
+
+    prop.__meta__ = {
+      custom: 'bool',
+    }
+
+    return prop
   }
 
   static get array() {
-    return this.create(Array)
+    const prop = this.create(Array)
+
+    prop.__meta__ = {
+      custom: 'array',
+    }
+
+    return prop
   }
 
   static get object() {
-    return this.create(Object)
+    const prop = this.create(Object)
+
+    prop.__meta__ = {
+      custom: 'object',
+    }
+
+    return prop
   }
 
   static get func() {
-    return this.create(Function)
+    const prop = this.create(Function)
+
+    prop.__meta__ = {
+      custom: 'func',
+    }
+
+    return prop
   }
 
   static get symbol() {
-    return this.create(Symbol)
+    const prop = this.create(Symbol)
+
+    prop.__meta__ = {
+      custom: 'any',
+    }
+
+    return prop
   }
 
   static get any() {
-    return this.create()
+    const prop = this.create()
+
+    prop.__meta__ = {
+      custom: 'any',
+    }
+
+    return prop
   }
 
   static instanceOf(type) {
-    return this.create(type)
+    const prop = this.create(type)
+
+    prop.__meta__ = {
+      custom: 'instanceOf',
+      type
+    }
+
+    return prop
   }
 
   static oneOf(...values) {
@@ -113,9 +180,16 @@ export default class PropTypes {
 
     ensureOne(values)
 
-    const types = Array.from(new Set(values.map(value => TYPES[typeof value] || Object)))
+    const types = Array.from(
+      new Set(values.map(value => TYPES[typeof value] || Object))
+    )
     const prop = this.create(types)
     const setOfValues = new Set(values)
+
+    prop.__meta__ = {
+      custom: 'oneOf',
+      values
+    }
 
     prop.validator = value => {
       return setOfValues.has(value)
@@ -130,6 +204,11 @@ export default class PropTypes {
     ensureOne(types)
 
     const prop = this.create(flat(types.map(type => ensureArray(type.type))))
+
+    prop.__meta__ = {
+      custom: 'oneOfType',
+      types,
+    }
 
     prop.validator = value =>
       types.some(validator => runValidation(validator, value))
@@ -150,6 +229,12 @@ export default class PropTypes {
     const prop = this.create(type)
     const types = flat(expected).map(normalizeType)
 
+    prop.__meta__ = {
+      custom: 'collection',
+      type,
+      item: types,
+    }
+
     prop.validator = value =>
       (type === Array ? value : Object.values(value)).every(item =>
         types.some(type => runValidation(type, item))
@@ -162,14 +247,14 @@ export default class PropTypes {
     const prop = this.create(Object)
     const shapeType = {}
 
-    Object.entries(shape).forEach(({0: key, 1: value}) => {
+    Object.entries(shape).forEach(({ 0: key, 1: value }) => {
       shapeType[key] = normalizeType(value)
     })
 
     prop.validator = value => {
       if (!(value && typeof value === 'object')) return prop.required !== true
 
-      return Object.entries(shapeType).every(({0: key, 1: type}) =>
+      return Object.entries(shapeType).every(({ 0: key, 1: type }) =>
         runValidation(type, value[key])
       )
     }
@@ -178,13 +263,33 @@ export default class PropTypes {
   }
 
   static validate(fn) {
-    try {
-      if (fn() === false) {
-        console.error('There are some failing validation.')
-      }
-    } catch (e) {
-      console.error(e)
+    console.warn(`'PropType.validate' is deprecated. Use 'PropType.run' instead.`)
+
+    return this.run(null, fn)
+  }
+
+  static run(context, fn) {
+    if (arguments.length === 1) {
+      fn = context
+      context = null
     }
+
+    const logger = createLogger(context)
+    
+    try {
+      return fn(logger)
+    } catch (e) {
+      logger.error(e.message)
+    }
+  }
+}
+
+import * as logger from './logger'
+function createLogger(context) {
+  return {
+    error: message => logger.error(message, context),
+    tip: message => logger.tip(message, context),
+    warn: message => logger.warn(message, context),
   }
 }
 
