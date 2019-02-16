@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+## 0.6.0 (2019-02-16)
+
+* feat: Add context logger to PropTypes.run helper, rename value to defaultValue and rename validate t ([381c253](https://github.com/znck/vue-prop-types/commit/381c253))
+
+
+
 <a name="0.5.4"></a>
 ## <small>0.5.4 (2019-02-10)</small>
 
