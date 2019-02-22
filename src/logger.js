@@ -14,7 +14,7 @@ export const warn = (msg, vm) => {
   if (config.warnHandler) {
     config.warnHandler.call(null, msg, vm, trace)
   } else if (hasConsole && !config.silent) {
-    console.error(`[Vue warn]: ${msg}${trace}`)
+    console.warn(`[Vue warn]: ${msg}${trace}`)
   }
 }
 export const error = (msg, vm) => {
