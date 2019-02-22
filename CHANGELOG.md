@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.1"></a>
+## <small>0.6.1 (2019-02-22)</small>
+
+* fix: Use console.warn for warn logs ([e382c29](https://github.com/znck/vue-prop-types/commit/e382c29))
+
+
+
 <a name="0.6.0"></a>
 ## 0.6.0 (2019-02-16)
 
