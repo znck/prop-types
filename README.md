@@ -40,7 +40,7 @@ Make sure to add `@znck/prop-types/remove` to babel config.
 // babel.config.js or .babelrc.js
 ...
   plugins: [
-    '@znck/prop-types/replace'
+    '@znck/prop-types/remove'
   ]
 ...
 ```
