@@ -87,7 +87,7 @@ export default function(babel) {
                 newProps.properties.push(
                   t.objectProperty(
                     t.identifier(prop.node.key.name),
-                    t.objectExpression([])
+                    t.identifier('Boolean')
                   )
                 )
               }
@@ -95,7 +95,7 @@ export default function(babel) {
               newProps.properties.push(
                 t.objectProperty(
                   t.identifier(prop.node.key.name),
-                  t.objectExpression([])
+                  t.identifier('Boolean')
                 )
               )
             }
