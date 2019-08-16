@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.3"></a>
+## <small>0.6.3 (2019-08-16)</small>
+
+* chore(release): 0.6.2 ([d144e96](https://github.com/znck/vue-prop-types/commit/d144e96))
+* fix: Preserve Boolean types ([6a27feb](https://github.com/znck/vue-prop-types/commit/6a27feb))
+* docs: update wrong plugin name in README (#8) ([ace8761](https://github.com/znck/vue-prop-types/commit/ace8761)), closes [#8](https://github.com/znck/vue-prop-types/issues/8)
+
+
+
 <a name="0.6.2"></a>
 ## <small>0.6.2 (2019-08-16)</small>
 
